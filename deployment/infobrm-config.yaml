@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scheduler-config
+  namespace: scheduler
+  labels:
+    app: scheduler
+data:
+  spring.data.mongodb.database=admin
+  spring.data.mongodb.authentication-database=admin
+  spring.data.mongodb.uri=mongodb://admin:password@localhost:27017/admin
+  spring.main.allow-bean-definition-overriding=true
+  bezkoder.app.jwtSecret= bezKoderSecretKey
+  bezkoder.app.jwtExpirationMs= 86400000
+
+  

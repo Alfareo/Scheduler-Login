@@ -1,0 +1,21 @@
+
+
+----------generar imagen
+docker images 
+docker rmi -f <IMAGE ID>
+docker build -t infobrm-orchestration .
+docker save infobrm-orchestration | gzip > infobrm-orchestration.tar.gz
+	
+-----------deploy 
+kubectl delete -f infobrm-orchestration.yaml 
+docker images 
+docker rmi -f  
+docker image load --input infobrm-orchestration.tar.gz
+kubectl apply -f infobrm-orchestration.yaml
+
+------------comandos
+sudo kubectl get pod --namespace kubemq
+sudo kubectl get pod --all-namespaces
+kubectl get services -n alarmlog
+
+curl -s http://localhost:8111/xxx -d '{"xxx": "xxx"}' -H 'Content-Type: application/json' 

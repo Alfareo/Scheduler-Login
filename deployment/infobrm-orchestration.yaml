@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler-security
+  namespace: scheduler
+  labels:
+    app: scheduler-security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scheduler-security
+  template:
+    metadata:
+      labels:
+        app: scheduler-security
+    spec:
+      containers:
+        - name: scheduler-security
+          image: scheduler-security
+          envFrom:
+            - configMapRef:
+                name: scheduler-config
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8111
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler-security
+  namespace: scheduler
+  labels:
+    app: scheduler-security
+spec:
+  ports:
+    - port: 8111
+      targetPort: 8111
+      nodePort: 30024
+      protocol: TCP
+  selector:
+    app: scheduler-security
+  type: NodePort
