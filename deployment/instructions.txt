@@ -3,7 +3,7 @@
 ----------generar imagen
 docker images 
 docker rmi -f <IMAGE ID>
-docker build -t infobrm-orchestration .
+docker build -t scheduler-security .
 docker save infobrm-orchestration | gzip > infobrm-orchestration.tar.gz
 	
 -----------deploy 
